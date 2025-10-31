@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction Model</title>
+    <!-- Load Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font import for a cleaner look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb; /* Very light subtle background */
+        }
+        /* Style the input focus slightly better */
+        .input-field:focus {
+            border-color: #3b82f6; /* Blue border on focus */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+            outline: none;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen pt-12 pb-12 flex justify-center px-4">
+
+    
+    <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl w-full max-w-4xl">
+
+        <h2 class="text-3xl font-extrabold text-gray-800 text-center mb-6 border-b pb-3">
+            Diabetes Prediction
+        </h2>
+        <p class="text-center text-gray-500 mb-10">
+            Enter the required fields below to receive a prediction. The layout is optimized for all screen sizes.
+        </p>
+
+        <!-- Prediction Form -->
+        <form action="/predict" method="post" class="space-y-6">
+            
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+
+                <!-- Pregnancies -->
+                <div>
+                    <label for="Pregnancies" class="block text-sm font-medium text-gray-700">Pregnancies</label>
+                    <input type="number" step="any" id="Pregnancies" name="Pregnancies" placeholder="e.g., 2" required 
+                           class="input-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg transition duration-150">
+                </div>
+                
+                <!-- Glucose -->
+                <div>
+                    <label for="Glucose" class="block text-sm font-medium text-gray-700">Glucose (mg/dL)</label>
+                    <input type="number" step="any" id="Glucose" name="Glucose" placeholder="e.g., 148" required
+                           class="input-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg transition duration-150">
+                </div>
+
+                <!-- Blood Pressure -->
+                <div>
+                    <label for="BloodPressure" class="block text-sm font-medium text-gray-700">Blood Pressure (mmHg)</label>
+                    <input type="number" step="any" id="BloodPressure" name="BloodPressure" placeholder="e.g., 72" required
+                           class="input-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg transition duration-150">
+                </div>
+
+                <!-- Skin Thickness -->
+                <div>
+                    <label for="SkinThickness" class="block text-sm font-medium text-gray-700">Skin Thickness (mm)</label>
+                    <input type="number" step="any" id="SkinThickness" name="SkinThickness" placeholder="e.g., 35" required
+                           class="input-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg transition duration-150">
+                </div>
+
+                <!-- Insulin -->
+                <div>
+                    <label for="Insulin" class="block text-sm font-medium text-gray-700">Insulin ($\mu$U/ml)</label>
+                    <input type="number" step="any" id="Insulin" name="Insulin" placeholder="e.g., 0" required
+                           class="input-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg transition duration-150">
+                </div>
+
+                <!-- BMI -->
+                <div>
+                    <label for="BMI" class="block text-sm font-medium text-gray-700">BMI (Weight in kg / Height in $\text{m}^2$)</label>
+                    <input type="number" step="any" id="BMI" name="BMI" placeholder="e.g., 33.6" required
+                           class="input-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg transition duration-150">
+                </div>
+
+                <!-- Diabetes Pedigree Function (DPF) -->
+                <div>
+                    <label for="DiabetesPedigreeFunction" class="block text-sm font-medium text-gray-700">DPF (Diabetes Pedigree Function)</label>
+                    <input type="number" step="any" id="DiabetesPedigreeFunction" name="DiabetesPedigreeFunction" placeholder="e.g., 0.627" required
+                           class="input-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg transition duration-150">
+                </div>
+                
+                <!-- Age -->
+                <div>
+                    <label for="Age" class="block text-sm font-medium text-gray-700">Age (years)</label>
+                    <input type="number" step="any" id="Age" name="Age" placeholder="e.g., 50" required
+                           class="input-field mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg transition duration-150">
+                </div>
+                
+            </div>
+
+            <!-- Submit Button (Full width across the 2 columns) -->
+            <button type="submit" 
+                    class="w-full mt-6 py-4 px-4 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-xl hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-[1.005] focus:outline-none focus:ring-4 focus:ring-blue-300">
+                Get Prediction
+            </button>
+        </form>
+
+        
+        {% if prediction_text %}
+            <div class="mt-10 pt-6 border-t border-gray-200">
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Prediction Result:</h3>
+                <!-- Dynamic styling based on result can be added here if the text allows -->
+                <p class="p-4 bg-blue-50 text-blue-800 text-xl font-bold rounded-lg text-center border border-blue-200">
+                    {{ prediction_text }}
+                </p>
+            </div>
+        {% endif %}
+        
+    </div>
+</body>
+</html>
